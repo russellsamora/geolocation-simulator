@@ -5,7 +5,9 @@ geolocation-simulator
 An HTML5 geolocation simulator for desktops that want to pretend to be mobile. Basically for simulating a mobile use case of walking / driving.
 
 ### Features
-* Oh, you want features?
+* Oh, you want features...
+* Customize speed of movement
+* Pause at any coordinate
 
 ### How it works
 When testing something with geolocation, it can be a pain to walk around, so this simulates that experience by overriding the native geolocation API so you change almost zero code switching to production. You supply a list of coordinates, and the simulator will follow the path (as the crow flies) between them. It moves at a constant pace and then stops on completion. You can provide a custom speed. Use something [like this](http://www.findlatitudeandlongitude.com/click-lat-lng-list/) to easily create your path coordinates.
