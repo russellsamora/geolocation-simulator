@@ -15,7 +15,7 @@
 	
 
 	var GeoSim = function(params) {
-		var self = this;
+		var self = {};
 		//private vars
 		var _watchTimer = null,
 			_coords = params.coords,
@@ -50,7 +50,7 @@
             if(_index < _coords.length - 1) {
                 //set current coordinate
                 _current.coords.latitude = _coords[_index].latitude;
-                _current.coords.longitude = _coords[self.index].longitude;
+                _current.coords.longitude = _coords[_index].longitude;
                 
                 //set rate of change
                 //distance between points with direction for lat and lon (km)
@@ -91,26 +91,25 @@
             }
         }
 
-        //override native geolocation
-        function overrideGeolocation() {
-        	//override native functionality
-	        navigator.geolocation.getCurrentPosition = function(cb,error,options) {
-	            cb(self.current);
-	        };
+        (function() {
+            //override native geolocation
+            navigator.geolocation.getCurrentPosition = function(cb,error,options) {
+                cb(_current);
+            };
 
-	        navigator.geolocation.watchPosition = function(cb,error,options) {
-	            var sendPos = function() {
-	                cb(self.current);
-	               _watchTimer = setTimeout(sendPos, 1000);
-	            };
-	            sendPos();
-	        };
+            navigator.geolocation.watchPosition = function(cb,error,options) {
+                var sendPos = function() {
+                    cb(_current);
+                   _watchTimer = setTimeout(sendPos, 1000);
+                };
+                sendPos();
+            };
 
-	        navigator.geolocation.clearWatch = function() {
-	            clearTimeout(_watchTimer);
-	        }
-        }();
-        
+            navigator.geolocation.clearWatch = function() {
+                clearTimeout(_watchTimer);
+            }
+        })();
+
         return self;
     };
 
@@ -125,4 +124,3 @@
 
     window.GeolocationSimulator = GeoSim;
 })();
-
