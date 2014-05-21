@@ -7,7 +7,10 @@ An HTML5 geolocation simulator for desktops that want to pretend to be mobile. B
 ### Features
 * Oh, you want features?
 
-### Browser Compatibility
+### How it works
+When testing something with geolocation, it can be a pain to walk around, so this simulates that experience. You supply a list of coordinates, and the simulator will follow the path (as the crow flies) between them. It moves at a constant pace and then stops on completion. You can provide a custom speed. 
+
+### Browser compatibility
 Tested in the following browsers/versions:
 * Google Chrome 4.0+
 
@@ -27,6 +30,9 @@ var simulation = GeolcationSimulation(coordinates);
 //when you are ready, fire it up.
 simulation.start(); 
 ```
+
+### Helpful bits
+Use something [like this](Use something likehttp://www.findlatitudeandlongitude.com/click-lat-lng-list/) to easily grab your path coordinates
 
 ## License
 
