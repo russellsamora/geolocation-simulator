@@ -18,7 +18,10 @@ When testing something with geolocation, it can be a pain to walk around or go t
 
 ### Browser compatibility
 Tested in the following browsers/versions:
-* Google Chrome 35
+* Chrome 35
+* Firefox 29
+* Safari 7
+* iOS 7.1
 
 ## Documentation
 
