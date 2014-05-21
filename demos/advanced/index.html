@@ -21,7 +21,7 @@
     </head>
     <body>
         <h2><a href='https://github.com/russellgoldenberg/geolocation-simulator'>geolocation-simulator.js</a></h2>
-        <h4>Advanced Demo: A very fast drive around Boston Common, with breaks</h4>
+        <h4>Advanced Demo: Cruisin' to work. Wicked delay on the Pike, 93 give me a break.</h4>
         <div class='output'></div>
         <div id='map'></div>
         <script src='../geolocation-simulator.js'></script>
@@ -31,22 +31,24 @@
             (function() {
                 //include sample data
                 var _pathData = [
-                    {latitude: 42.352376, longitude: -71.064548},
-                    {latitude: 42.353454, longitude: -71.064184},
-                    {latitude: 42.354707, longitude: -71.063647, pause: 3000},
-                    {latitude: 42.355785, longitude: -71.062768},
-                    {latitude: 42.356483, longitude: -71.062016},
-                    {latitude: 42.357069, longitude: -71.062660},
-                    {latitude: 42.357672, longitude: -71.063261, pause: 5000},
-                    {latitude: 42.357164, longitude: -71.064978},
-                    {latitude: 42.356768, longitude: -71.066844},
-                    {latitude: 42.356213, longitude: -71.069334},
-                    {latitude: 42.355832, longitude: -71.070921},
-                    {latitude: 42.355452, longitude: -71.072509},
-                    {latitude: 42.353517, longitude: -71.071479},
-                    {latitude: 42.351947, longitude: -71.070685},
-                    {latitude: 42.352566, longitude: -71.067595},
-                    {latitude: 42.352344, longitude: -71.064591}
+                    {latitude: 42.347856, longitude: -71.073668},
+                    {latitude: 42.347872, longitude: -71.068561, pause: 5000},
+                    {latitude: 42.347555, longitude: -71.065986},
+                    {latitude: 42.346349, longitude: -71.060793},
+                    {latitude: 42.346445, longitude: -71.058433},
+                    {latitude: 42.348062, longitude: -71.057832},
+                    {latitude: 42.348697, longitude: -71.058648},
+                    {latitude: 42.348094, longitude: -71.060128},
+                    {latitude: 42.344716, longitude: -71.061416, pause: 15000},
+                    {latitude: 42.340529, longitude: -71.063561},
+                    {latitude: 42.336928, longitude: -71.065321},
+                    {latitude: 42.335469, longitude: -71.065578},
+                    {latitude: 42.332630, longitude: -71.063433},
+                    {latitude: 42.329473, longitude: -71.060450},
+                    {latitude: 42.323794, longitude: -71.055214},
+                    {latitude: 42.321398, longitude: -71.054099},
+                    {latitude: 42.321366, longitude: -71.051245},
+                    {latitude: 42.316876, longitude: -71.048884}
                 ];
 
                 //the geolocation simulator
@@ -66,7 +68,7 @@
                     makeMap();
 
                     //create the simulator, pass pathData array as parameter
-                    _simulator = GeolocationSimulator({coords: _pathData, speed: 100});
+                    _simulator = GeolocationSimulator({coords: _pathData, speed: 200});
 
                     //start it up (begin moving)
                     _simulator.start();
