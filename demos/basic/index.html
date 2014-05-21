@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>geolocation-simulator.js: basic demo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                font-family: Helvetica, sans-serif;
+                text-align: center;
+            }
+            #map {
+                height: 360px;
+                margin: 0 auto;
+                max-width: 720px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <h2><a href='https://github.com/russellgoldenberg/geolocation-simulator'>geolocation-simulator.js</a></h2>
+        <h4>Basic Demo: A drive around Boston Common</h4>
+        <div class='output'></div>
+        <div id='map'></div>
+        <script src='../geolocation-simulator.js'></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+        <script type='text/javascript'>
+            (function() {
+                //include sample data
+                var _pathData = [
+                    {latitude: 42.352376, longitude: -71.064548},
+                    {latitude: 42.353454, longitude: -71.064184},
+                    {latitude: 42.354707, longitude: -71.063647},
+                    {latitude: 42.355785, longitude: -71.062768},
+                    {latitude: 42.356483, longitude: -71.062016},
+                    {latitude: 42.357069, longitude: -71.062660},
+                    {latitude: 42.357672, longitude: -71.063261},
+                    {latitude: 42.357164, longitude: -71.064978},
+                    {latitude: 42.356768, longitude: -71.066844},
+                    {latitude: 42.356213, longitude: -71.069334},
+                    {latitude: 42.355832, longitude: -71.070921},
+                    {latitude: 42.355452, longitude: -71.072509},
+                    {latitude: 42.353517, longitude: -71.071479},
+                    {latitude: 42.351947, longitude: -71.070685},
+                    {latitude: 42.352566, longitude: -71.067595},
+                    {latitude: 42.352344, longitude: -71.064591}
+                ];
+
+                //the geolocation simulator
+                var _simulator;
+
+                //for the map
+                var _map,
+                    _marker;
+                
+                //some stuff to monitor position
+                var _timer,
+                    _timerInterval = 1000, //play with these to see more infrequent results (>= 1000)
+                    _update = 0;
+
+                function init() {
+                    // to see the results visually
+                    makeMap();
+
+                    //create the simulator, pass pathData array as parameter
+                    _simulator = GeolocationSimulator({coords: _pathData});
+
+                    //start it up (begin moving)
+                    _simulator.start();
+
+                    //start accessing the geolocation data, as you would
+                    getPosition();
+                }
+
+                //tap into the geolocation api
+                function getPosition() {
+                    //if geolocation is available, proceed
+                    if ('geolocation' in navigator) {
+                        var options = {
+                            enableHighAccuracy: true,
+                            timeout: Infinity,
+                            maximumAge: 0
+                        };
+                        //get location
+                        navigator.geolocation.getCurrentPosition(newPosition, geoError, options);
+
+                        //lets keep getting it to see where this fella goes
+                        _timer = setTimeout(getPosition, _timerInterval);
+
+                    } else {
+                        alert.log('what browser are you using??');
+                    }
+                }
+
+                //handle the geolocation response obj
+                function newPosition(data) {
+                    _update++;
+                    $('.output').empty();
+                    
+                    output('update ' + _update);
+
+                    var coords = data.coords;
+
+                    output('lat: ' + coords.latitude.toFixed(7));
+                    output('lon: ' + coords.longitude.toFixed(7));
+
+                    if(map) {
+                        var newLatLng = new google.maps.LatLng(coords.latitude, coords.longitude);
+                        map.panTo(newLatLng);    
+                        marker.setCenter(newLatLng);
+                    }
+                }
+
+                //handle geolocation errors (there won't be any!)
+                function geoError(error) {
+                    console.log(error);
+                }
+
+                //put some text on screen
+                function output(str) {
+                    var p = $('<p>' + str + '</p>')
+                    $('.output').append(p);
+                }
+
+                function makeMap() {
+                    var coords = new google.maps.LatLng(_pathData[0].latitude, _pathData[0].longitude);
+                    
+                    var myOptions = {
+                        zoom: 15,
+                        center: coords,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    };
+
+                    map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+                    var opts = {
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 1,
+                        strokeWeight: 1,
+                        fillColor: '#FF0000',
+                        fillOpacity: 0.5,
+                        map: map,
+                        center: coords,
+                        radius: 40
+                    };
+
+                    // Add the circle for this city to the map.
+                    marker = new google.maps.Circle(opts);
+                }
+
+                //boot it up
+                init();
+            })();
+        </script>
+    </body>
+</html>

@@ -9,6 +9,10 @@ An HTML5 geolocation simulator for desktops that want to pretend to be mobile. B
 * Customize speed of movement
 * Pause at any coordinate
 
+### Demos
+* [Basic](http://russellgoldenberg.com/libraries/geolocation-simulator/basic)
+* [Advanced](http://russellgoldenberg.com/libraries/geolocation-simulator/advanced)
+
 ### How it works
 When testing something with geolocation, it can be a pain to walk around, so this simulates that experience by overriding the native geolocation API so you change almost zero code switching to production. You supply a list of coordinates, and the simulator will follow the path (as the crow flies) between them. It moves at a constant pace and then stops on completion. You can provide a custom speed. Use something [like this](http://www.findlatitudeandlongitude.com/click-lat-lng-list/) to easily create your path coordinates.
 
