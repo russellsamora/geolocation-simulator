@@ -27,11 +27,24 @@ Tested in the following browsers/versions:
 ##### Basic
 ```javascript
 var coordinates = [
-	{latitude: 42.74357, longitude: -71.42357},
-	{latitude: 42.74353, longitude: -71.42359},
-	{latitude: 42.74342, longitude: -71.42363}
+	{latitude: 42.347856, longitude: -71.073668},
+    {latitude: 42.347872, longitude: -71.068561},
+    {latitude: 42.347555, longitude: -71.065986},
 ];
-var simulation = GeolcationSimulation(coordinates);
+var simulation = GeolcationSimulation({coords: coordinates});
+
+//when you are ready, fire it up.
+simulation.start(); 
+```
+
+##### Customized
+```javascript
+var coordinates = [
+	{latitude: 42.347856, longitude: -71.073668},
+    {latitude: 42.347872, longitude: -71.068561, pause: 5000}, //pause for 5 seconds
+    {latitude: 42.347555, longitude: -71.065986},
+];
+var simulation = GeolcationSimulation({coords: coordinates, speed: 160}); //160 km (slow down!)
 
 //when you are ready, fire it up.
 simulation.start(); 
