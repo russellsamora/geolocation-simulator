@@ -1,8 +1,6 @@
 /*!
 *  geolocation-simulator.js v0.0.1
-*
 *  (c) 2014, Russell Goldenberg
-*
 *  MIT License
 */
 
@@ -13,7 +11,6 @@
         SECONDS_IN_HOUR = 3600,
         UPDATE_INTERVAL = 1000;
     
-
     var GeoSim = function(params) {
         var self = {};
         //private vars

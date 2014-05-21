@@ -1,44 +1,41 @@
 /*!
 *  geolocation-simulator.js v0.0.1
-*
 *  (c) 2014, Russell Goldenberg
-*
 *  MIT License
 */
 
 (function() {
 
-	//constants
+    //constants
     var KM_IN_DEGREE = 110.562,
         SECONDS_IN_HOUR = 3600,
         UPDATE_INTERVAL = 1000;
-	
-
-	var GeoSim = function(params) {
-		var self = {};
-		//private vars
-		var _watchTimer = null,
-			_coords = params.coords,
-			_speed = (params.speed || 40) / SECONDS_IN_HOUR, // km/second (defaults to 40kmh or 25mph)
-			_current = { 
-				coords: { 
-					latitude: 0,
-					longitude: 0,
-					accuracy: 1,
-					altitude: null,
-					altitudeAccuracy: null,
-					heading: null,
-					speed: null
-	            },
-	            timestamp: 1},
-	        _rate = {latitude: 0, longitude: 0},
-	        _index = -1,
+    
+    var GeoSim = function(params) {
+        var self = {};
+        //private vars
+        var _watchTimer = null,
+            _coords = params.coords,
+            _speed = (params.speed || 40) / SECONDS_IN_HOUR, // km/second (defaults to 40kmh or 25mph)
+            _current = { 
+                coords: { 
+                    latitude: 0,
+                    longitude: 0,
+                    accuracy: 1,
+                    altitude: null,
+                    altitudeAccuracy: null,
+                    heading: null,
+                    speed: null
+                },
+                timestamp: 1},
+            _rate = {latitude: 0, longitude: 0},
+            _index = -1,
             _pauseTimeout,
-	        _numSteps,
-	        _currentStep;
+            _numSteps,
+            _currentStep;
 
-		//public functions            
-		self.start = function() {
+        //public functions            
+        self.start = function() {
             nextCoord();
         };
 
@@ -46,7 +43,7 @@
 
         //advance to next coordinate in array
         function nextCoord() {
-        	_index++;
+            _index++;
             //check if route completed
             if(_index < _coords.length - 1) {
                 var coord = _coords[_index];
@@ -83,7 +80,7 @@
                     setTimeout(step, UPDATE_INTERVAL);
                 }
             } else {
-            	//path is complete
+                //path is complete
                 alert('you have arrived!');
             }
         }
@@ -120,12 +117,12 @@
         return self;
     };
 
-	//utils
-	//add convert to radian method for numbers
-	if (typeof(Number.prototype.toRad) === "undefined") {
-		Number.prototype.toRad = function() {
-			return this * Math.PI / 180;
-		}
+    //utils
+    //add convert to radian method for numbers
+    if (typeof(Number.prototype.toRad) === "undefined") {
+        Number.prototype.toRad = function() {
+            return this * Math.PI / 180;
+        }
     }
 
     window.GeolocationSimulator = GeoSim;
