@@ -34,7 +34,7 @@ var coordinates = [
     {latitude: 42.347872, longitude: -71.068561},
     {latitude: 42.347555, longitude: -71.065986},
 ];
-var simulation = GeolcationSimulation({coords: coordinates});
+var simulation = GeolocationSimulator({coords: coordinates});
 
 //when you are ready, fire it up.
 simulation.start(); 
@@ -43,11 +43,11 @@ simulation.start();
 ##### Customized
 ```javascript
 var coordinates = [
-	{latitude: 42.347856, longitude: -71.073668},
+    {latitude: 42.347856, longitude: -71.073668},
     {latitude: 42.347872, longitude: -71.068561, pause: 5000}, //pause for 5 seconds
     {latitude: 42.347555, longitude: -71.065986},
 ];
-var simulation = GeolcationSimulation({coords: coordinates, speed: 160}); //160 km (slow down!)
+var simulation = GeolocationSimulator({coords: coordinates, speed: 160}); //160 km (slow down!)
 
 //when you are ready, fire it up.
 simulation.start(); 
